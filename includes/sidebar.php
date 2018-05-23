@@ -1,62 +1,49 @@
  <div class="col-md-4">
+<!-- Blog Search Well -->
+<div class="well">
+    <h4>Blog Search</h4>
+    <form action="search.php" method="post">
+    <div class="input-group">
+        <input name="search" type="text" class="form-control">
+        <span class="input-group-btn">
+            <button name="submit" class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+        </button>
+        </span>
+    </div>
+</form><!-- search form -->
+    <!-- /.input-group -->
+</div>
 
 
+   <!-- Blog Categories Well -->
+    <div class="well">
 
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <form action="search.php" method="post">
-                    <div class="input-group">
-                        <input name="search" type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button name="submit" class="btn btn-default" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                </form><!-- search form -->
-                    <!-- /.input-group -->
-                </div>
+    <?php 
+        $query = "SELECT * FROM categories LIMIT 4";
+        $categories_sidebar = $connection->query($query);
+  
+    ?>
+        <h4>Blog Categories</h4>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-unstyled">
+        <?php 
+            while ($row = mysqli_fetch_assoc($categories_sidebar)) {
+            $cat_title =  $row['cat_title'];
+            echo "<li><a href='#'>{$cat_title}</a></li>";
 
-
-
-
-
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-
-<?php 
-
-                $query = "SELECT * FROM categories LIMIT 4";
-
-                $categories_sidebar = $connection->query($query);
-               
-?>
-
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-unstyled">
-
-<?php 
-                     while ($row = mysqli_fetch_assoc($categories_sidebar)) {
-                        $cat_title =  $row['cat_title'];
-                        echo "<li><a href='#'>{$cat_title}</a></li>";
-
-}
-?>
-
-                            </ul>
-                        </div>
-
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <?php include 'widgets.php'; ?>
-                </div>
-
+            }
+        ?>
+                </ul>
             </div>
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- Side Widget Well -->
+    <div class="well">
+        <?php include 'widgets.php'; ?>
+    </div>
+
+</div>
